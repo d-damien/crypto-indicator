@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Page1Form.ui.qml</file>
+        <file>Page2Form.ui.qml</file>
+        <file>main.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>main.cpp</file>
+        <file>util/Http.js</file>
+        <file>exchange/Binance.js</file>
+        <file>exchange/Exchange.js</file>
+    </qresource>
+</RCC>
