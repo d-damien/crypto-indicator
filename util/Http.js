@@ -10,8 +10,6 @@ function put(url, params, callback) {
 }
 
 function request(method, url, params, callback) {
-    url = "https://api.binance.com/api/v3/ticker/price?symbol=LTCBTC"
-
     if (method === 'GET')
         url += serialize(params)
     else if (method === 'PUT')

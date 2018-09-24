@@ -1,6 +1,6 @@
 import QtQuick 2.11
 import QtQuick.Controls 2.4
-import "util/Http.js" as Http
+import "exchange/Binance.js" as Binance
 
 ApplicationWindow {
     visible: true
@@ -20,7 +20,7 @@ ApplicationWindow {
             id: page2
             mouseArea {
                 onClicked: {
-                    Http.get(0, {}, function(o) {
+                    Binance.ticker('LTCBTC', function(o) {
                         text.text = 'value ' + o.symbol + ' ' + o.price
                     })
                 }

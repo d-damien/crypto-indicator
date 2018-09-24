@@ -11,15 +11,17 @@ function baseUrl() { }
 
 /**
   List available pairs
+  @param callback asynchronous
 */
-function list() { }
+function list(callback) { }
 
 
 /**
   Get pair currrent info
   @param symbol pair name on the exchange
+  @param callback asynchronous
 */
-function ticker(symbol) { }
+function ticker(symbol, callback) { }
 
 
 /**
