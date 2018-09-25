@@ -9,5 +9,6 @@
         <file>util/Http.js</file>
         <file>exchange/Binance.js</file>
         <file>exchange/Exchange.js</file>
+        <file>exchange/Kucoin.js</file>
     </qresource>
 </RCC>

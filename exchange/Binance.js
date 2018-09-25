@@ -11,18 +11,18 @@ function list(callback) {
 
     Http.get(url, {}, function(list) {
         callback(list.map(
-            function(l) { return clarify(l.symbol) }
+            function(l) { return clarify(l.symbol, true) }
         ))
     })
 }
 
 function ticker(symbol, callback) {
     let url = baseUrl() + '/v1/ticker/24hr'
-    let params = { symbol: symbol.replace('/', '') }
+    let params = { symbol: clarify(symbol, false) }
 
     Http.get(url, params, function(t) {
         callback({
-            symbol: t.symbol,
+            symbol: clarify(t.symbol, true),
             price: t.lastPrice,
             change: t.priceChangePercent,
             high: t.highPrice,
@@ -42,12 +42,15 @@ function toUSDT(pair) {
 }
 
 /**
-  Transform ETHUSDT to ETH/USDT
+  Translate ETHUSDT <-> ETH/USDT
 */
-function clarify(symbol) {
-    let basicCurrencies = ['BTC', 'ETH', 'BNB', 'USDT']
-
-    for (var currency in basicCurrencies)
-        if (symbol.endsWith(currency))
-            return symbol.replace(currency, '/' + currency)
+function clarify(symbol, exchangeToProgram) {
+    if (exchangeToProgram) {
+        let currencies = ['BTC', 'ETH', 'BNB', 'USDT']
+        for (var c in currencies)
+            if (symbol.endsWith(currencies[c]))
+                return symbol.replace(currencies[c], '/' + currencies[c])
+    } else {
+        return symbol.replace('/', '')
+    }
 }

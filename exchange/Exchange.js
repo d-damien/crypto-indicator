@@ -29,3 +29,11 @@ function ticker(symbol, callback) { }
   @param pair { symbol, price }
 */
 function toUSDT(symbol, value) { }
+
+/**
+  Translate exchange notation to program notation
+  or the other way around
+  @param symbol to translate
+  @param exchangeToProgram boolean direction
+*/
+function clarify(symbol, exchangeToProgram) { }
