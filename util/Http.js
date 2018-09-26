@@ -25,6 +25,7 @@ function request(method, url, params, callback) {
     }
 
     xhr.open(method, url)
+    xhr.setRequestHeader('User-Agent', '')
     xhr.send(params)
 }
 

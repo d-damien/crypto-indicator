@@ -11,5 +11,6 @@
         <file>exchange/Exchange.js</file>
         <file>exchange/Kucoin.js</file>
         <file>exchange/Coinex.js</file>
+        <file>exchange/Litebit.js</file>
     </qresource>
 </RCC>
