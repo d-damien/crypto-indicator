@@ -10,5 +10,6 @@
         <file>exchange/Binance.js</file>
         <file>exchange/Exchange.js</file>
         <file>exchange/Kucoin.js</file>
+        <file>exchange/Coinex.js</file>
     </qresource>
 </RCC>

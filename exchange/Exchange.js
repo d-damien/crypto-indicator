@@ -37,3 +37,18 @@ function toUSDT(symbol, value) { }
   @param exchangeToProgram boolean direction
 */
 function clarify(symbol, exchangeToProgram) { }
+
+
+/**
+  Common implementation for no separator cases
+  ETHUSDT <-> ETH/USDT
+*/
+function nullClarify(symbol, exchangeToProgram, currencies) {
+    if (exchangeToProgram) {
+        for (var c in currencies)
+            if (symbol.endsWith(currencies[c]))
+                return symbol.replace(currencies[c], '/' + currencies[c])
+    } else {
+        return symbol.replace('/', '')
+    }
+}

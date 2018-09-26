@@ -1,5 +1,6 @@
 .pragma library
 .import "../util/Http.js" as Http
+.import "Exchange.js" as Exchange
 
 
 function baseUrl() {
@@ -45,12 +46,6 @@ function toUSDT(pair) {
   Translate ETHUSDT <-> ETH/USDT
 */
 function clarify(symbol, exchangeToProgram) {
-    if (exchangeToProgram) {
-        let currencies = ['BTC', 'ETH', 'BNB', 'USDT']
-        for (var c in currencies)
-            if (symbol.endsWith(currencies[c]))
-                return symbol.replace(currencies[c], '/' + currencies[c])
-    } else {
-        return symbol.replace('/', '')
-    }
+    let currencies = ['BTC', 'ETH', 'BNB', 'USDT']
+    return Exchange.nullClarify(symbol, exchangeToProgram, currencies)
 }

@@ -2,6 +2,7 @@ import QtQuick 2.11
 import QtQuick.Controls 2.4
 import "exchange/Binance.js" as Binance
 import "exchange/Kucoin.js" as Kucoin
+import "exchange/Coinex.js" as Coinex
 
 ApplicationWindow {
     visible: true
@@ -21,7 +22,7 @@ ApplicationWindow {
             id: page2
             mouseArea {
                 onClicked: {
-                    Kucoin.ticker('LTC/BTC', function(o) {
+                    Coinex.ticker('LTC/BTC', function(o) {
                         text.text = 'value ' + o.symbol + ' ' + o.price
                     })
                 }
