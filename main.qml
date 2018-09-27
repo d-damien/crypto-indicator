@@ -4,6 +4,7 @@ import "exchange/Binance.js" as Binance
 import "exchange/Kucoin.js" as Kucoin
 import "exchange/Coinex.js" as Coinex
 import "exchange/Litebit.js" as Litebit
+import "exchange/Cryptopia.js" as Cryptopia
 
 ApplicationWindow {
     visible: true
@@ -23,7 +24,7 @@ ApplicationWindow {
             id: page2
             mouseArea {
                 onClicked: {
-                    Litebit.ticker('LTC/EUR', function(o) {
+                    Cryptopia.ticker('LTC/BTC', function(o) {
                         text.text = 'value ' + o.symbol + ' ' + o.price
                     })
                 }
