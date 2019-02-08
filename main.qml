@@ -21,14 +21,6 @@ ApplicationWindow {
         }
 
         Page2Form {
-            id: page2
-            mouseArea {
-                onClicked: {
-                    Cryptopia.ticker('LTC/BTC', function(o) {
-                        text.text = 'value ' + o.symbol + ' ' + o.price
-                    })
-                }
-            }
         }
     }
 
