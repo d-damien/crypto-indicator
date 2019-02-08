@@ -12,4 +12,11 @@ Page {
         anchors.right: parent.right
         anchors.left: parent.left
     }
+
+    Text {
+        id: text1
+        text: qsTr("Cliquez-moi")
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
+    }
 }
