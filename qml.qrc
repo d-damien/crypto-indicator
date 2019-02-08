@@ -13,5 +13,7 @@
         <file>exchange/Coinex.js</file>
         <file>exchange/Litebit.js</file>
         <file>exchange/Cryptopia.js</file>
+        <file>component/ticker/Ticker.qml</file>
+        <file>component/ticker/TickerForm.ui.qml</file>
     </qresource>
 </RCC>
