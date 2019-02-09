@@ -25,26 +25,7 @@ TickerForm {
         let combobox = 'Binance'
         let symbol = 'IOTA/USDT'
 
-        let exchange = null
-        switch (combobox) {
-            case 'Binance':
-                exchange = Binance
-                break
-            case 'Coinex':
-                exchange = Coinex
-                break
-            case 'Cryptopia':
-                exchange = Cryptopia
-                break
-            case 'Kucoin':
-                exchange = Kucoin
-                break
-            case 'Litebit':
-                exchange = Litebit
-                break
-            default:
-                return console.error('non existant exchange')
-        }
+        let exchange = eval(combobox)
 
         exchange.ticker(symbol, function(t) {
             _exchange.text = combobox
