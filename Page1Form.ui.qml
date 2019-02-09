@@ -6,8 +6,10 @@ import "component/ticker"
 Page {
     width: 600
     height: 400
+    property alias triggerUpdateClick: triggerUpdateClick
+    property alias ticker: ticker
 
-    TickerForm {
+    Ticker {
         id: ticker
         anchors.right: parent.right
         anchors.left: parent.left
@@ -18,5 +20,9 @@ Page {
         text: qsTr("Cliquez-moi")
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
+        MouseArea {
+            id: triggerUpdateClick
+            anchors.fill: parent
+        }
     }
 }

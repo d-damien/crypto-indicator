@@ -18,6 +18,9 @@ ApplicationWindow {
         currentIndex: tabBar.currentIndex
 
         Page1Form {
+            triggerUpdateClick.onClicked: {
+                ticker.update()
+            }
         }
 
         Page2Form {
