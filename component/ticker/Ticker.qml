@@ -21,6 +21,7 @@ TickerForm {
     */
 
     function update() {
+        state = 'Load'
         // todo
         let combobox = 'Binance'
         let symbol = 'IOTA/USDT'
@@ -35,6 +36,8 @@ TickerForm {
             _low.text = t.low
             _change.text = t.change
             _volume.text = t.volume
+
+            state = '' // loaded
         })
     }
 }

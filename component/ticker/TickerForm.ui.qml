@@ -4,19 +4,19 @@ import QtQuick.Controls 2.4
 Item {
     width: 400
     height: 100
-    property alias _editOk: _editOk
-    property alias _usdtSwitch: _usdtSwitch
-    property alias _symbolComboBox: _symbolComboBox
-    property alias _exchangeComboBox: _exchangeComboBox
-    property alias _volume: _volume
-    property alias _change: _change
-    property alias _low: _low
-    property alias _price: _price
-    property alias _high: _high
-    property alias clickToEdit: clickToEdit
-    property alias _symbol: _symbol
     property alias _exchange: _exchange
-    property alias column: symbolCol
+    property alias _symbol: _symbol
+    property alias _high: _high
+    property alias _price: _price
+    property alias _low: _low
+    property alias _change: _change
+    property alias _volume: _volume
+    property alias clickToEdit: clickToEdit
+
+    property alias _exchangeComboBox: _exchangeComboBox
+    property alias _symbolComboBox: _symbolComboBox
+    property alias _usdtSwitch: _usdtSwitch
+    property alias confirm: confirm
 
     Rectangle {
         id: rectangle
@@ -31,7 +31,7 @@ Item {
     }
 
     Row {
-        id: row
+        id: displayRow
         anchors.fill: parent
 
         Column {
@@ -57,67 +57,73 @@ Item {
             }
         }
 
-        Column {
-            id: priceCol
-            width: parent.width / 4
-            topPadding: 10
+        Row {
+            id: infoRow
+            width: 3/4 * parent.width
+            height: parent.height
 
-            Text {
-                id: _high
-                text: qsTr("High")
-                width: parent.width
-                height: 20
-                opacity: 0.9
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignHCenter
+            Column {
+                id: priceCol
+                width: parent.width / 3
+                topPadding: 10
+
+                Text {
+                    id: _high
+                    text: qsTr("High")
+                    width: parent.width
+                    height: 20
+                    opacity: 0.9
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
+
+                Text {
+                    id: _price
+                    text: qsTr("Price")
+                    width: parent.width
+                    height: 40
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
+
+                Text {
+                    id: _low
+                    text: qsTr("Low")
+                    width: parent.width
+                    height: 20
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
             }
 
-            Text {
-                id: _price
-                text: qsTr("Price")
-                width: parent.width
-                height: 40
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignHCenter
+            Column {
+                id: changeCol
+                width: parent.width / 3
+                topPadding: 20
+
+                Text {
+                    id: _change
+                    width: parent.width
+                    height: 60
+                    text: qsTr("Change")
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
             }
 
-            Text {
-                id: _low
-                text: qsTr("Low")
-                width: parent.width
-                height: 20
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignHCenter
-            }
-        }
+            Column {
+                id: volumeCol
+                width: parent.width / 3
+                topPadding: 40
 
-        Column {
-            id: changeCol
-            width: parent.width / 4
-            topPadding: 20
-
-            Text {
-                id: _change
-                width: parent.width
-                height: 60
-                text: qsTr("Change")
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignHCenter
-            }
-        }
-
-        Column {
-            id: volumeCol
-            width: parent.width / 4
-            topPadding: 40
-
-            Text {
-                id: _volume
-                text: qsTr("Volume")
-                width: parent.width
-                height: 20
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignHCenter
+                Text {
+                    id: _volume
+                    text: qsTr("Volume")
+                    width: parent.width
+                    height: 20
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                }
             }
         }
 
@@ -150,46 +156,35 @@ Item {
         }
 
         Button {
-            id: _editOk
+            id: confirm
             text: qsTr("OK")
         }
     }
 
     states: [
         State {
-            name: "Load"
-
-            PropertyChanges {
-                target: priceCol
-                visible: false
-            }
-
-            PropertyChanges {
-                target: changeCol
-                visible: false
-            }
-
-            PropertyChanges {
-                target: volumeCol
-                visible: false
-            }
-
-            PropertyChanges {
-                target: loadIndicator
-                anchors.leftMargin: 100
-                visible: true
-            }
-        },
-        State {
             name: "Edit"
 
             PropertyChanges {
-                target: row
+                target: displayRow
                 visible: false
             }
 
             PropertyChanges {
                 target: editRow
+                visible: true
+            }
+        },
+        State {
+            name: "Load"
+
+            PropertyChanges {
+                target: infoRow
+                visible: false
+            }
+
+            PropertyChanges {
+                target: loadIndicator
                 visible: true
             }
         }

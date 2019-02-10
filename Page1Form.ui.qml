@@ -9,8 +9,7 @@ Page {
 
     Ticker {
         id: ticker
-        anchors.right: parent.right
-        anchors.left: parent.left
+        width: parent.width
     }
 
     Text {
