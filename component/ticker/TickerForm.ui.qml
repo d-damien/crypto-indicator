@@ -1,5 +1,5 @@
-import QtQuick 2.4
-import QtQuick.Controls 2.3
+import QtQuick 2.11
+import QtQuick.Controls 2.4
 
 Item {
     width: 400
@@ -13,10 +13,10 @@ Item {
     property alias _low: _low
     property alias _price: _price
     property alias _high: _high
-    property alias _editMouseArea: _editMouseArea
+    property alias clickToEdit: clickToEdit
     property alias _symbol: _symbol
     property alias _exchange: _exchange
-    property alias column: column
+    property alias column: symbolCol
 
     Rectangle {
         id: rectangle
@@ -25,161 +25,107 @@ Item {
         anchors.fill: parent
     }
 
+    MouseArea {
+        id: clickToEdit
+        anchors.fill: parent
+    }
+
     Row {
         id: row
         anchors.fill: parent
 
         Column {
-            id: column
+            id: symbolCol
             width: parent.width / 4
-            anchors.bottom: parent.bottom
-            anchors.left: parent.left
-            anchors.top: parent.top
+            topPadding: 20
+            spacing: 20
 
             Text {
                 id: _exchange
-                height: 20
                 text: qsTr("Exchange")
-                anchors.top: parent.top
-                anchors.topMargin: 20
-                verticalAlignment: Text.AlignVCenter
+                width: parent.width
+                height: 20
                 horizontalAlignment: Text.AlignHCenter
-                anchors.right: parent.right
-                anchors.rightMargin: 0
-                anchors.left: parent.left
-                anchors.leftMargin: 0
-                font.pixelSize: 12
             }
 
             Text {
                 id: _symbol
-                height: 20
                 text: qsTr("Symbol")
-                anchors.top: _exchange.bottom
-                anchors.topMargin: 20
-                anchors.left: parent.left
-                anchors.leftMargin: 0
-                font.pixelSize: 12
-                verticalAlignment: Text.AlignVCenter
-                anchors.right: parent.right
+                width: parent.width
+                height: 20
                 horizontalAlignment: Text.AlignHCenter
-                anchors.rightMargin: 0
-            }
-
-            MouseArea {
-                id: _editMouseArea
-                anchors.fill: parent
             }
         }
 
         Column {
-            id: column1
+            id: priceCol
             width: parent.width / 4
-            anchors.leftMargin: 0
-            anchors.left: column.right
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
+            topPadding: 10
 
             Text {
                 id: _high
-                height: 20
                 text: qsTr("High")
+                width: parent.width
+                height: 20
                 opacity: 0.9
-                anchors.left: parent.left
-                anchors.leftMargin: 0
                 verticalAlignment: Text.AlignVCenter
-                font.pixelSize: 12
-                anchors.top: parent.top
-                anchors.right: parent.right
                 horizontalAlignment: Text.AlignHCenter
-                anchors.topMargin: 10
-                anchors.rightMargin: 0
             }
 
             Text {
                 id: _price
-                height: 40
                 text: qsTr("Price")
-                anchors.left: parent.left
-                anchors.leftMargin: 0
+                width: parent.width
+                height: 40
                 verticalAlignment: Text.AlignVCenter
-                font.pixelSize: 12
-                anchors.top: _high.bottom
-                anchors.right: parent.right
                 horizontalAlignment: Text.AlignHCenter
-                anchors.topMargin: 0
-                anchors.rightMargin: 0
             }
 
             Text {
                 id: _low
-                height: 20
                 text: qsTr("Low")
-                anchors.left: parent.left
-                anchors.leftMargin: 0
+                width: parent.width
+                height: 20
                 verticalAlignment: Text.AlignVCenter
-                font.pixelSize: 12
-                anchors.top: _price.bottom
-                anchors.right: parent.right
                 horizontalAlignment: Text.AlignHCenter
-                anchors.topMargin: 0
-                anchors.rightMargin: 0
             }
         }
 
         Column {
-            id: column2
+            id: changeCol
             width: parent.width / 4
-            anchors.leftMargin: 0
-            anchors.left: column1.right
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
+            topPadding: 20
 
             Text {
                 id: _change
-                width: 101
+                width: parent.width
                 height: 60
                 text: qsTr("Change")
-                anchors.left: parent.left
-                anchors.leftMargin: 0
-                font.pixelSize: 12
                 verticalAlignment: Text.AlignVCenter
-                anchors.top: parent.top
-                anchors.right: parent.right
                 horizontalAlignment: Text.AlignHCenter
-                anchors.topMargin: 20
-                anchors.rightMargin: 0
             }
         }
 
         Column {
-            id: column3
+            id: volumeCol
             width: parent.width / 4
-            anchors.leftMargin: 0
-            anchors.left: column2.right
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
+            topPadding: 40
 
             Text {
                 id: _volume
-                height: 20
                 text: qsTr("Volume")
-                anchors.left: parent.left
-                anchors.leftMargin: 0
-                font.pixelSize: 12
+                width: parent.width
+                height: 20
                 verticalAlignment: Text.AlignVCenter
-                anchors.top: parent.top
-                anchors.right: parent.right
                 horizontalAlignment: Text.AlignHCenter
-                anchors.topMargin: 40
-                anchors.rightMargin: 0
             }
         }
 
         BusyIndicator {
-            id: _loadIndicator
-            anchors.fill: parent
+            id: loadIndicator
             visible: false
+            width: 3/4 * parent.width
+            height: parent.height
         }
     }
 
@@ -187,100 +133,49 @@ Item {
         id: editRow
         visible: false
         anchors.fill: parent
+        topPadding: 26
+        spacing: 13
 
-        Column {
-            id: column4
-            width: parent.width / parent.children.length
-            anchors.bottom: parent.bottom
-            anchors.left: parent.left
-            anchors.top: parent.top
-
-            ComboBox {
-                id: _exchangeComboBox
-                anchors.top: parent.top
-                anchors.topMargin: 26
-                anchors.left: parent.left
-                anchors.leftMargin: 0
-                anchors.right: parent.right
-                anchors.rightMargin: 13
-            }
+        ComboBox {
+            id: _exchangeComboBox
         }
 
-        Column {
-            id: column5
-            width: parent.width / parent.children.length
-            anchors.leftMargin: 0
-            anchors.left: column4.right
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-
-            ComboBox {
-                id: _symbolComboBox
-                anchors.top: parent.top
-                anchors.topMargin: 26
-                anchors.right: parent.right
-                anchors.rightMargin: 13
-                anchors.left: parent.left
-                anchors.leftMargin: 0
-            }
+        ComboBox {
+            id: _symbolComboBox
         }
 
-        Column {
-            id: column6
-            width: parent.width / parent.children.length
-            anchors.leftMargin: 0
-            anchors.left: column5.right
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-
-            Switch {
-                id: _usdtSwitch
-                text: qsTr("Switch")
-                anchors.top: parent.top
-                anchors.topMargin: 26
-                anchors.right: parent.right
-                anchors.rightMargin: 29
-                anchors.left: parent.left
-                anchors.leftMargin: 0
-            }
+        Switch {
+            id: _usdtSwitch
+            text: qsTr("Switch")
         }
 
-        Column {
-            id: column7
-            width: parent.width / parent.children.length
-            anchors.top: parent.top
-            anchors.left: column6.right
-            anchors.leftMargin: 0
-            anchors.bottom: parent.bottom
-
-            Button {
-                id: _editOk
-                text: qsTr("OK")
-                anchors.verticalCenter: parent.verticalCenter
-            }
+        Button {
+            id: _editOk
+            text: qsTr("OK")
         }
     }
+
     states: [
         State {
             name: "Load"
 
             PropertyChanges {
-                target: column1
+                target: priceCol
                 visible: false
             }
 
             PropertyChanges {
-                target: column2
+                target: changeCol
                 visible: false
             }
 
             PropertyChanges {
-                target: column3
+                target: volumeCol
                 visible: false
             }
 
             PropertyChanges {
-                target: _loadIndicator
+                target: loadIndicator
                 anchors.leftMargin: 100
                 visible: true
             }

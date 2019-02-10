@@ -4,8 +4,6 @@ import "component/ticker"
 
 
 Page {
-    width: 600
-    height: 400
     property alias triggerUpdateClick: triggerUpdateClick
     property alias ticker: ticker
 
