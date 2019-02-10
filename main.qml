@@ -3,6 +3,7 @@ import QtQuick.Controls 2.4
 import "exchange/Cryptopia.js" as Cryptopia
 
 ApplicationWindow {
+    id: app
     visible: true
     width: 640
     height: 480

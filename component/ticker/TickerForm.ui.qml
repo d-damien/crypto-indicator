@@ -9,23 +9,25 @@ Item {
     property string _low: _low
     property string _change: _change
     property string _volume: _volume
-    property alias clickToEdit: clickToEdit
 
     property alias exchangeComboBox: exchangeComboBox
     property alias _symbolComboBox: _symbolComboBox
     property alias usdtSwitch: usdtSwitch
     property alias confirm: confirm
 
-    Rectangle {
-        id: rectangle
-        color: "#8d8d8d"
-        z: -1
-        anchors.fill: parent
-    }
+    // change bg dynamically (e.g. drag & drop)
+    property string bgColor: bgColor
 
     MouseArea {
         id: clickToEdit
         anchors.fill: parent
+    }
+
+    Rectangle {
+        id: background
+        anchors.fill: parent
+        color: bgColor || "#8d8d8d"
+        z: -1
     }
 
     Row {
