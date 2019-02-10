@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>Page1Form.ui.qml</file>
         <file>Page2Form.ui.qml</file>
         <file>main.qml</file>
         <file>qtquickcontrols2.conf</file>
@@ -15,5 +14,6 @@
         <file>exchange/Cryptopia.js</file>
         <file>component/ticker/Ticker.qml</file>
         <file>component/ticker/TickerForm.ui.qml</file>
+        <file>TickerView.qml</file>
     </qresource>
 </RCC>

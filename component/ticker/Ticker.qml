@@ -29,13 +29,11 @@ TickerForm {
         let exchange = eval(combobox)
 
         exchange.ticker(symbol, function(t) {
-            _exchange.text = combobox
-            _symbol.text = t.symbol
-            _price.text = t.price
-            _high.text = t.high
-            _low.text = t.low
-            _change.text = t.change
-            _volume.text = t.volume
+            _price = t.price
+            _high = t.high
+            _low = t.low
+            _change = t.change
+            _volume = t.volume
 
             state = '' // loaded
         })

@@ -4,18 +4,16 @@ import QtQuick.Controls 2.4
 Item {
     width: 400
     height: 100
-    property alias _exchange: _exchange
-    property alias _symbol: _symbol
-    property alias _high: _high
-    property alias _price: _price
-    property alias _low: _low
-    property alias _change: _change
-    property alias _volume: _volume
+    property string _high: _high
+    property string _price: _price
+    property string _low: _low
+    property string _change: _change
+    property string _volume: _volume
     property alias clickToEdit: clickToEdit
 
-    property alias _exchangeComboBox: _exchangeComboBox
+    property alias exchangeComboBox: exchangeComboBox
     property alias _symbolComboBox: _symbolComboBox
-    property alias _usdtSwitch: _usdtSwitch
+    property alias usdtSwitch: usdtSwitch
     property alias confirm: confirm
 
     Rectangle {
@@ -41,16 +39,14 @@ Item {
             spacing: 20
 
             Text {
-                id: _exchange
-                text: qsTr("Exchange")
+                text: _exchange || qsTr("[Exchange]")
                 width: parent.width
                 height: 20
                 horizontalAlignment: Text.AlignHCenter
             }
 
             Text {
-                id: _symbol
-                text: qsTr("Symbol")
+                text: _symbol || qsTr("[Symbol]")
                 width: parent.width
                 height: 20
                 horizontalAlignment: Text.AlignHCenter
@@ -68,8 +64,7 @@ Item {
                 topPadding: 10
 
                 Text {
-                    id: _high
-                    text: qsTr("High")
+                    text: _high || qsTr("[High]")
                     width: parent.width
                     height: 20
                     opacity: 0.9
@@ -78,8 +73,7 @@ Item {
                 }
 
                 Text {
-                    id: _price
-                    text: qsTr("Price")
+                    text: _price || qsTr("[Price]")
                     width: parent.width
                     height: 40
                     verticalAlignment: Text.AlignVCenter
@@ -87,8 +81,7 @@ Item {
                 }
 
                 Text {
-                    id: _low
-                    text: qsTr("Low")
+                    text: _low || qsTr("[Low]")
                     width: parent.width
                     height: 20
                     verticalAlignment: Text.AlignVCenter
@@ -102,10 +95,9 @@ Item {
                 topPadding: 20
 
                 Text {
-                    id: _change
+                    text: _change || qsTr("[Change]")
                     width: parent.width
                     height: 60
-                    text: qsTr("Change")
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                 }
@@ -117,8 +109,7 @@ Item {
                 topPadding: 40
 
                 Text {
-                    id: _volume
-                    text: qsTr("Volume")
+                    text: _volume || qsTr("[Volume]")
                     width: parent.width
                     height: 20
                     verticalAlignment: Text.AlignVCenter
@@ -143,7 +134,7 @@ Item {
         spacing: 13
 
         ComboBox {
-            id: _exchangeComboBox
+            id: exchangeComboBox
         }
 
         ComboBox {
@@ -151,7 +142,7 @@ Item {
         }
 
         Switch {
-            id: _usdtSwitch
+            id: usdtSwitch
             text: qsTr("Switch")
         }
 

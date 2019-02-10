@@ -17,10 +17,7 @@ ApplicationWindow {
         anchors.fill: parent
         currentIndex: tabBar.currentIndex
 
-        Page1Form {
-            triggerUpdateClick.onClicked: {
-                ticker.update()
-            }
+        TickerView {
         }
 
         Page2Form {
