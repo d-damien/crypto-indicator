@@ -18,11 +18,6 @@ Item {
     // change bg dynamically (e.g. drag & drop)
     property string bgColor: bgColor
 
-    MouseArea {
-        id: clickToEdit
-        anchors.fill: parent
-    }
-
     Rectangle {
         id: background
         anchors.fill: parent

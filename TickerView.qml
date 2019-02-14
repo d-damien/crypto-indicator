@@ -1,10 +1,13 @@
 import QtQuick 2.11
 import QtQuick.Controls 2.4
 import "component/ticker"
+import "component/util"
 
 
 ListView {
+    id: listView
     model: ListModel {
+        id: listModel
         ListElement {
             _exchange: 'Coinex'
             _symbol: 'IOTA/USDT'
@@ -13,34 +16,25 @@ ListView {
             _exchange: 'Kucoin'
             _symbol: 'XRP/ETH'
         }
+        ListElement {
+            _exchange: 'Binance'
+            _symbol: 'ZIL/BTC'
+        }
+        ListElement {
+            _exchange: 'Litebit'
+            _symbol: 'DOGE/EUR'
+        }
     }
 
-    delegate: Ticker {
-        id: ticker
-        width: parent.width
+    delegate: ReorderDelegate {
+        width: listView.width
+        height: 100
 
-        // keep ListView flickable + drag & drop
-        property bool held: false
-        // visual clue for D&D
-        bgColor: held ? 'lightgray' : 'gray'
-
-        MouseArea {
-            anchors.fill: parent
-
-            // D&D to reorder tickers
-            onPressAndHold: held = true
-            onReleased: held = false
-            drag.target: held ? parent : null
-            drag.axis: Drag.YAxis
+        Ticker {
+            width: parent.width
+            // visual clue for D&D
+            // bgColor: dragArea.held ? 'lightgray' : 'gray'
         }
-
-        // above other items
-        states: State {
-            when: held
-            PropertyChanges {
-                target: ticker
-                z: 10
-            }
-        }
+        onMove: listModel.move(from, to, 1)
     }
 }
