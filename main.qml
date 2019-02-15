@@ -18,10 +18,7 @@ ApplicationWindow {
         anchors.fill: parent
         currentIndex: tabBar.currentIndex
 
-        TickerView {
-        }
-
-        Page2Form {
+        TickerListView {
         }
     }
 
