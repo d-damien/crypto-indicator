@@ -16,12 +16,12 @@ Item {
     property alias confirm: confirm
 
     // change bg dynamically (e.g. drag & drop)
-    property string bgColor: bgColor
+    property alias bgColor: background.color
 
     Rectangle {
         id: background
         anchors.fill: parent
-        color: bgColor || "#8d8d8d"
+        color: "#8d8d8d"
         z: -1
     }
 

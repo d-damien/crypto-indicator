@@ -33,7 +33,8 @@ ListView {
         Ticker {
             width: parent.width
             // visual clue for D&D
-            // bgColor: dragArea.held ? 'lightgray' : 'gray'
+             bgColor: held ? 'lightgray' : 'gray'
+             opacity: 0.9
         }
         onMove: listModel.move(from, to, 1)
     }
