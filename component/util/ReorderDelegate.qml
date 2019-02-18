@@ -17,6 +17,9 @@ MouseArea {
     property bool _held: false
     readonly property alias held: root._held
 
+    // prevent DropArea from waiting drop() forever
+    Component.onDestruction: container.Drag.cancel()
+
     drag {
         target: _held ? container : undefined
         axis: Drag.XandYAxis
