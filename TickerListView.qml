@@ -6,6 +6,20 @@ import "component/util"
 
 ListView {
     id: listView
+    DropArea {
+        z: -1
+        height: 2
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: parent.top
+        }
+
+        onEntered: {
+            console.log('exit listView')
+            listView.model.remove(0)
+        }
+    }
     model: ListModel {
         id: listModel
         ListElement {

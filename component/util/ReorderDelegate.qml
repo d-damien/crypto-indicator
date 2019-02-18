@@ -23,7 +23,7 @@ MouseArea {
         threshold: 0
         minimumX: 0
         maximumX: draggedParent.width - width
-        minimumY: 0
+        // minimumY: 0
         maximumY: draggedParent.height - height
     }
 
