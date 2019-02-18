@@ -31,11 +31,13 @@ ListView {
         height: 100
 
         Ticker {
+            id: ticker
             width: parent.width
             // visual clue for D&D
              bgColor: held ? 'lightgray' : 'gray'
              opacity: 0.9
         }
+        onDoubleClicked: ticker.state = 'Edit'
         onMove: listModel.move(from, to, 1)
     }
 }

@@ -6,19 +6,57 @@ import "../../exchange/Kucoin.js" as Kucoin
 import "../../exchange/Litebit.js" as Litebit
 
 TickerForm {
-    /*
-    _editMouseArea {
-        onDoubleClicked: state = 'Edit'
-        // ... ?
+    property var exchanges: [
+        '',
+        'Binance',
+        'Coinex',
+        'Cryptopia',
+        'Kucoin',
+        'Litebit',
+    ]
+    property var symbols: []
+
+    // edit logic
+    exchangeComboBox {
+        onActivated: {
+            _exchange = exchangeComboBox.model[index]
+            let exchange = eval(_exchange)
+            // @todo eval safety
+            if (! exchange)
+                return
+
+            // @todo loading symbol list
+            exchange.list(function(l) {
+                symbols = l
+                console.log('symbols.length', l.length)
+            })
+        }
+
     }
 
-    _editOk {
-        onClicked: {
-            state = ''
-            // ...
+    symbolComboBox {
+        onPressedChanged: {
+            if (! symbolComboBox.pressed)
+                return
+            symbolComboBox.model = symbols.filter(
+                function(s) { return s.match(symbolComboBox.editText) })
+        }
+
+        onActivated: {
+            _symbol = symbolComboBox.model[index]
         }
     }
-    */
+
+    confirmButton {
+        onClicked: {
+            if (!_exchange || !_symbol)
+                return
+
+            state = ''
+            update()
+        }
+    }
+
 
     function update() {
         state = 'Load'

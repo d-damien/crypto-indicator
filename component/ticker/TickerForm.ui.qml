@@ -9,14 +9,16 @@ Item {
     property string _low: _low
     property string _change: _change
     property string _volume: _volume
+    property string _exchange: _exchange
 
     property alias exchangeComboBox: exchangeComboBox
-    property alias _symbolComboBox: _symbolComboBox
-    property alias usdtSwitch: usdtSwitch
-    property alias confirm: confirm
+    property alias symbolComboBox: symbolComboBox
+    // property alias usdtSwitch: usdtSwitch
+    property alias confirmButton: confirmButton
 
     // change bg dynamically (e.g. drag & drop)
     property alias bgColor: background.color
+
 
     Rectangle {
         id: background
@@ -128,23 +130,26 @@ Item {
         visible: false
         anchors.fill: parent
         topPadding: 26
-        spacing: 13
+        leftPadding: parent.width / 4
+        spacing: 20
 
         ComboBox {
             id: exchangeComboBox
+            model: exchanges
         }
 
         ComboBox {
-            id: _symbolComboBox
+            id: symbolComboBox
+            editable: true
         }
 
-        Switch {
-            id: usdtSwitch
-            text: qsTr("Switch")
-        }
+//        Switch {
+//            id: usdtSwitch
+//            text: qsTr("Switch")
+//        }
 
         Button {
-            id: confirm
+            id: confirmButton
             text: qsTr("OK")
         }
     }
