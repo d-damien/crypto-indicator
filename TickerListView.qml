@@ -21,6 +21,13 @@ ListView {
         }
     }
 
+    // double click to create
+    MouseArea {
+        z: -2
+        anchors.fill: parent
+        onDoubleClicked: listModel.append({})
+    }
+
     model: ListModel {
         id: listModel
         ListElement {
@@ -30,14 +37,6 @@ ListView {
         ListElement {
             _exchange: 'Kucoin'
             _symbol: 'XRP/ETH'
-        }
-        ListElement {
-            _exchange: 'Binance'
-            _symbol: 'ZIL/BTC'
-        }
-        ListElement {
-            _exchange: 'Litebit'
-            _symbol: 'DOGE/EUR'
         }
     }
 
