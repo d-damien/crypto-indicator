@@ -22,6 +22,7 @@ ApplicationWindow {
     }
 
     footer: Row {
+        spacing: 10
         PageIndicator {
             id: tabBar
             currentIndex: swipeView.currentIndex
@@ -30,15 +31,37 @@ ApplicationWindow {
             anchors.verticalCenter: parent.verticalCenter
         }
 
-        // insert page button near page indicator
+        // page buttons near page indicator
         Button {
-            text: '+'
+            contentItem: Text {
+                text: '⊗'
+                font.pointSize: 14
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                color: parent.enabled ? 'black' : 'gray'
+            }
+            enabled: swipeView.count > 1
+            onPressAndHold: {
+                    swipeView.removeItem(swipeView.currentItem)
+            }
+            width: 30
+            height: 40
+        }
+
+        Button {
+            contentItem: Text {
+                text: '🞤'
+                font.pointSize: 14
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+            }
             enabled: swipeView.currentItem.model.count > 0
             onClicked: {
                 let listView = Qt.createComponent("TickerListView.qml").createObject(swipeView)
                 swipeView.insertItem(swipeView.currentIndex + 1, listView)
             }
-            height: 30
+            width: 30
+            height: 40
         }
     }
 }
