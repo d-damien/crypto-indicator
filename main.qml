@@ -27,18 +27,28 @@ ApplicationWindow {
             currentIndex: swipeView.currentIndex
             count: swipeView.count
             interactive: true
-            anchors.verticalCenter: parent.verticalCenter
-        }
 
-        // insert page button near page indicator
-        Button {
-            text: '+'
-            enabled: swipeView.currentItem.model.count > 0
-            onClicked: {
-                let listView = Qt.createComponent("TickerListView.qml").createObject(swipeView)
-                swipeView.insertItem(swipeView.currentIndex + 1, listView)
+            MouseArea {
+                anchors.fill: parent
+                propagateComposedEvents: true
+                onClicked: mouse.accepted = false
+                onDoubleClicked: {
+                    // don't stack pages after empty page
+                    if (swipeView.currentIndex === swipeView.count-1
+                        && ! swipeView.currentItem.model.count)
+                        return
+
+                    // add new page
+                    let listView = Qt.createComponent("TickerListView.qml").createObject(swipeView)
+                    swipeView.insertItem(swipeView.currentIndex + 1, listView)
+                }
+
+                onPressAndHold: {
+                    // remove page
+                    if (swipeView.currentIndex > 0)
+                        swipeView.removeItem(swipeView.currentItem)
+                }
             }
-            height: 30
         }
     }
 }
