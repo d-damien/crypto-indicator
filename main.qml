@@ -1,6 +1,5 @@
 import QtQuick 2.11
 import QtQuick.Controls 2.4
-import "exchange/Cryptopia.js" as Cryptopia
 
 ApplicationWindow {
     id: app
@@ -22,10 +21,24 @@ ApplicationWindow {
         }
     }
 
-    footer: PageIndicator {
-        id: tabBar
-        currentIndex: swipeView.currentIndex
-        count: swipeView.count
-        interactive: true
+    footer: Row {
+        PageIndicator {
+            id: tabBar
+            currentIndex: swipeView.currentIndex
+            count: swipeView.count
+            interactive: true
+            anchors.verticalCenter: parent.verticalCenter
+        }
+
+        // insert page button near page indicator
+        Button {
+            text: '+'
+            enabled: swipeView.currentItem.model.count > 0
+            onClicked: {
+                let listView = Qt.createComponent("TickerListView.qml").createObject(swipeView)
+                swipeView.insertItem(swipeView.currentIndex + 1, listView)
+            }
+            height: 30
+        }
     }
 }
