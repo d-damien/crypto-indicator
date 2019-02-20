@@ -20,6 +20,7 @@ TickerForm {
     exchangeComboBox {
         onActivated: {
             _exchange = exchangeComboBox.model[index]
+            model._exchange = _exchange
             let exchange = eval(_exchange)
             // @todo eval safety
             if (! exchange)
@@ -44,6 +45,7 @@ TickerForm {
 
         onActivated: {
             _symbol = symbolComboBox.model[index]
+            model._symbol = _symbol
         }
     }
 

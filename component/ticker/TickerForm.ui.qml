@@ -9,7 +9,6 @@ Item {
     property string _low: _low
     property string _change: _change
     property string _volume: _volume
-    property string _exchange: _exchange
 
     property alias exchangeComboBox: exchangeComboBox
     property alias symbolComboBox: symbolComboBox

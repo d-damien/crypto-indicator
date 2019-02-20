@@ -32,19 +32,11 @@ ListView {
     MouseArea {
         z: -2
         anchors.fill: parent
-        onDoubleClicked: listModel.append({})
+        onDoubleClicked: listModel.append({_exchange: '', _symbol: ''})
     }
 
     model: ListModel {
         id: listModel
-        ListElement {
-            _exchange: 'Coinex'
-            _symbol: 'IOTA/USDT'
-        }
-        ListElement {
-            _exchange: 'Kucoin'
-            _symbol: 'XRP/ETH'
-        }
     }
 
     delegate: ReorderDelegate {
