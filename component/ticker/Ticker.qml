@@ -61,19 +61,21 @@ TickerForm {
 
 
     function update() {
+        if (! _exchange || ! _symbol) {
+            state = 'Edit'
+            return
+        }
+
         state = 'Load'
-        // todo
-        let combobox = 'Binance'
-        let symbol = 'IOTA/USDT'
+        // @todo sécurité
+        let exchange = eval(_exchange)
 
-        let exchange = eval(combobox)
-
-        exchange.ticker(symbol, function(t) {
-            _price = t.price
-            _high = t.high
-            _low = t.low
-            _change = t.change
-            _volume = t.volume
+        exchange.ticker(_symbol, function(t) {
+            _price = t.price || '--'
+            _high = t.high || '--'
+            _low = t.low || '--'
+            _change = t.change || '--'
+            _volume = t.volume || '--'
 
             state = '' // loaded
         })
