@@ -47,8 +47,11 @@ ListView {
             id: ticker
             width: parent.width
             // visual clue for D&D
-             bgColor: held ? 'lightgray' : 'gray'
-             opacity: 0.9
+            bgColor: held ? 'lightgray' : 'gray'
+            opacity: 0.9
+
+            // update delegate only when instantiated
+            Component.onCompleted: ticker.update()
         }
         onDoubleClicked: ticker.state = 'Edit'
         onMove: listModel.move(from, to, 1)
