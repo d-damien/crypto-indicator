@@ -28,7 +28,7 @@ function ticker(symbol, callback) {
         let t = ticker.result
         callback({
             symbol: symbol,
-            price: 'buy: ' + t.buy + ' || sell: ' + t.sell,
+            price: t.buy + ' / ' + t.sell,
             volume: t.volume
         })
     })

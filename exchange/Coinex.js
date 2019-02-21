@@ -14,7 +14,7 @@ function list(callback) {
             return console.error('API error : Coinex - ' + list.code)
 
         callback(list.data.map(
-            function(l) { return clarify(l.symbol, true) }
+            function(l) { return clarify(l, true) }
         ))
     })
 }
@@ -47,6 +47,6 @@ function toUSDT() {
   @TODO fonction commune avec Binance != currencies
 */
 function clarify(symbol, exchangeToProgram) {
-    let currencies = ['BTC', 'ETH', 'BCH', 'CET', 'USDT']
+    let currencies = ['BTC', 'BCH', 'ETH', 'USDT', 'USDC']
     return Exchange.nullClarify(symbol, exchangeToProgram, currencies)
 }
