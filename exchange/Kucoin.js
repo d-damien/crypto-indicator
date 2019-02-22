@@ -1,5 +1,6 @@
 .pragma library
 .import "../util/Http.js" as Http
+.import "../util/Error.js" as Error
 
 function baseUrl() {
     return 'https://api.kucoin.com/api'
@@ -8,11 +9,13 @@ function baseUrl() {
 function list(callback) {
     let url = baseUrl() + '/v1/symbols'
 
-    Http.get(url, {}, function(list) {
+    Http.get(url, {}, function(error, list) {
+        if (error !== null)
+            return callback(error)
         if (list.code !== '200000') // sic
-            return console.error('API failed : Kucoin')
+            return callback(Error.API)
 
-        callback(list.data.map(
+        callback(null, list.data.map(
             function(l) { return clarify(l.symbol, true) }
         ))
     })
@@ -22,12 +25,14 @@ function ticker(symbol, callback) {
     let url = baseUrl() + '/v1/market/stats'
     let params = { symbol: clarify(symbol, false) }
 
-    Http.get(url, params, function(ticker) {
+    Http.get(url, params, function(error, ticker) {
+        if (error !== null)
+            return callback(error)
         if (ticker.code !== '200000')
-            return console.error('API failed : Kucoin')
+            return callback(Error.API)
 
         let t = ticker.data
-        callback({
+        callback(null, {
             price: t.last,
             change: t.changeRate,
             high: t.high,

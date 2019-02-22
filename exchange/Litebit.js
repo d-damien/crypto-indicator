@@ -1,5 +1,6 @@
 .pragma library
 .import "../util/Http.js" as Http
+.import "../util/Error.js" as Error
 
 function baseUrl() {
     return 'https://api.litebit.eu'
@@ -8,11 +9,13 @@ function baseUrl() {
 function list(callback) {
     let url = baseUrl() + '/markets'
 
-    Http.get(url, {}, function(list) {
-        if (! list.success)
-            return console.error('API error : Litebit')
+    Http.get(url, {}, function(error, list) {
+        if (error !== null)
+            return callback(error)
+        if (list.success !== true)
+            return callback(Error.API)
 
-        callback(Object.keys(list.result).map(
+        callback(null, Object.keys(list.result).map(
             function(l) { return clarify(l, true) }
         ))
     })
@@ -21,12 +24,14 @@ function list(callback) {
 function ticker(symbol, callback) {
     let url = baseUrl() + '/market/' + clarify(symbol, false)
 
-    Http.get(url, {}, function(ticker) {
-        if (! ticker.success)
-            return console.error('API error : Litebit')
+    Http.get(url, {}, function(error, ticker) {
+        if (error !== null)
+            return callback(error)
+        if (ticker.success !== true)
+            return callback(Error.API)
 
         let t = ticker.result
-        callback({
+        callback(null, {
             symbol: symbol,
             price: t.buy + ' / ' + t.sell,
             volume: t.volume

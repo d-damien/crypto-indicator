@@ -1,4 +1,5 @@
 .pragma library
+.import "Error.js" as Error
 
 
 function get(url, params, callback) {
@@ -19,8 +20,11 @@ function request(method, url, params, callback) {
     xhr.onreadystatechange = function() {
         // @TODO handle net errors
         if (xhr.readyState === XMLHttpRequest.DONE) {
-            // @TODO handle parse errors (if http err msg)
-            callback(JSON.parse(xhr.responseText))
+            try {
+                callback(null, JSON.parse(xhr.responseText))
+            } catch (e) {
+                callback(Error.PARSE)
+            }
         }
     }
 

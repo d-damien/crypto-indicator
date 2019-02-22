@@ -14,6 +14,7 @@ Item {
     property alias symbolComboBox: symbolComboBox
     // property alias usdtSwitch: usdtSwitch
     property alias confirmButton: confirmButton
+    property alias errorMsg: errorMsg
 
     // change bg dynamically (e.g. drag & drop)
     property alias bgColor: background.color
@@ -122,6 +123,17 @@ Item {
             width: 3/4 * parent.width
             height: parent.height
         }
+
+        Text {
+            id: errorMsg
+            visible: false
+            text: 'Error...'
+            width: 3/4 * parent.width
+            height: parent.height
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+        }
+
     }
 
     Row {
@@ -177,6 +189,19 @@ Item {
 
             PropertyChanges {
                 target: loadIndicator
+                visible: true
+            }
+        },
+        State {
+            name: "Error"
+
+            PropertyChanges {
+                target: infoRow
+                visible: false
+            }
+
+            PropertyChanges {
+                target: errorMsg
                 visible: true
             }
         }

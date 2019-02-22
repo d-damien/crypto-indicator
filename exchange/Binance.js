@@ -1,5 +1,6 @@
 .pragma library
 .import "../util/Http.js" as Http
+.import "../util/Error.js" as Error
 .import "Exchange.js" as Exchange
 
 
@@ -10,8 +11,13 @@ function baseUrl() {
 function list(callback) {
     let url = baseUrl() + '/v3/ticker/price'
 
-    Http.get(url, {}, function(list) {
-        callback(list.map(
+    Http.get(url, {}, function(error, list) {
+        if (error !== null)
+            return callback(error)
+        if (list.code)
+            return callback(Error.API)
+
+        callback(null, list.map(
             function(l) { return clarify(l.symbol, true) }
         ))
     })
@@ -21,8 +27,13 @@ function ticker(symbol, callback) {
     let url = baseUrl() + '/v1/ticker/24hr'
     let params = { symbol: clarify(symbol, false) }
 
-    Http.get(url, params, function(t) {
-        callback({
+    Http.get(url, params, function(error, t) {
+        if (error !== null)
+            return callback(error)
+        if (t.code)
+            return callback(Error.API)
+
+        callback(null, {
             symbol: clarify(t.symbol, true),
             price: t.lastPrice,
             change: t.priceChangePercent,
@@ -46,6 +57,16 @@ function toUSDT(pair) {
   Translate ETHUSDT <-> ETH/USDT
 */
 function clarify(symbol, exchangeToProgram) {
-    let currencies = ['BTC', 'ETH', 'BNB', 'USDT']
+    let currencies = [
+        'BNB',
+        'BTC',
+        'ETH',
+        'XRP',
+        'USDT',
+        'TUSD',
+        'PAX',
+        'USDC',
+        'USDS'
+    ]
     return Exchange.nullClarify(symbol, exchangeToProgram, currencies)
 }
