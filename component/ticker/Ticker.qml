@@ -22,10 +22,8 @@ TickerForm {
         onActivated: {
             _exchange = exchangeComboBox.model[index]
             model._exchange = _exchange
-            let exchange = eval(_exchange)
-            // @todo eval safety
-            if (! exchange)
-                return
+            let exchange = fromString(_exchange)
+            if (! exchange) return
 
             // @todo loading symbol list
             exchange.list(function(error, l) {
@@ -69,10 +67,10 @@ TickerForm {
             return
         }
 
-        state = 'Load'
-        // @todo sécurité
-        let exchange = eval(_exchange)
+        let exchange = fromString(_exchange)
+        if (! exchange) return
 
+        state = 'Load'
         exchange.ticker(_symbol, function(error, t) {
             if (handleError(error))
                 return
@@ -105,5 +103,13 @@ TickerForm {
         }
         errorMsg.text = text
         return true
+    }
+
+    // Safely change string to exchange class.
+    // Using eval to avoid long switch()es.
+    function fromString(exchangeName) {
+        if (exchanges.indexOf(exchangeName) === -1 || ! exchangeName)
+            return null
+        return eval(exchangeName)
     }
 }

@@ -9,6 +9,7 @@
 */
 function baseUrl() { }
 
+
 /**
   List available pairs
   @param callback asynchronous
@@ -29,6 +30,7 @@ function ticker(symbol, callback) { }
   @param pair { symbol, price }
 */
 function toUSDT(symbol, value) { }
+
 
 /**
   Translate exchange notation to program notation
