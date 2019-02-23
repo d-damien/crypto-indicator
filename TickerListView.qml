@@ -18,13 +18,6 @@ ListView {
 
         onEntered: {
             listView.model.remove(0)
-
-            // remove empty pages (except first page)
-            let swipeView = listView.parent.parent.parent
-            if (listView.model.count > 0 || swipeView.currentIndex === 0)
-                return
-
-            swipeView.removeItem(swipeView.currentItem)
         }
     }
 
