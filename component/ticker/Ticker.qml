@@ -1,4 +1,5 @@
 import QtQuick 2.4
+import QtQuick.Window 2.3
 import "../../exchange/Binance.js" as Binance
 import "../../exchange/Coinex.js" as Coinex
 import "../../exchange/Cryptopia.js" as Cryptopia
@@ -60,6 +61,13 @@ TickerForm {
         }
     }
 
+    Timer {
+        id: timer
+        interval: 300000
+        running: app.visible === true
+        repeat: true
+        onTriggered: update()
+    }
 
     function update() {
         if (! _exchange || ! _symbol) {
