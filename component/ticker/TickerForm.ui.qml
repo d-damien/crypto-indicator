@@ -1,5 +1,6 @@
 import QtQuick 2.11
 import QtQuick.Controls 2.4
+import QtQuick.Controls.Material 2.3
 
 Item {
     width: 400
@@ -23,8 +24,11 @@ Item {
     Rectangle {
         id: background
         anchors.fill: parent
-        color: "#8d8d8d"
+        color: Material.background
         z: -1
+        border.width: 2
+        border.color: 'grey'
+        radius: 10
     }
 
     Row {
@@ -37,17 +41,23 @@ Item {
             topPadding: 20
             spacing: 20
 
-            Text {
+            Label {
                 text: _exchange || qsTr("[Exchange]")
                 width: parent.width
                 height: 20
+                font.family: 'Ubuntu Condensed'
+                font.pointSize: 15
+                font.bold: true
+                color: _exchanges[_exchange]
                 horizontalAlignment: Text.AlignHCenter
             }
 
-            Text {
+            Label {
                 text: _symbol || qsTr("[Symbol]")
                 width: parent.width
                 height: 20
+                font.bold: true
+                color: _exchanges[_exchange]
                 horizontalAlignment: Text.AlignHCenter
             }
         }
@@ -62,16 +72,15 @@ Item {
                 width: parent.width / 3
                 topPadding: 10
 
-                Text {
+                Label {
                     text: _high || qsTr("[High]")
                     width: parent.width
                     height: 20
-                    opacity: 0.9
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                 }
 
-                Text {
+                Label {
                     text: _price || qsTr("[Price]")
                     width: parent.width
                     height: 40
@@ -79,7 +88,7 @@ Item {
                     horizontalAlignment: Text.AlignHCenter
                 }
 
-                Text {
+                Label {
                     text: _low || qsTr("[Low]")
                     width: parent.width
                     height: 20
@@ -93,7 +102,7 @@ Item {
                 width: parent.width / 3
                 topPadding: 20
 
-                Text {
+                Label {
                     text: _change || qsTr("[Change]")
                     width: parent.width
                     height: 60
@@ -107,7 +116,7 @@ Item {
                 width: parent.width / 3
                 topPadding: 40
 
-                Text {
+                Label {
                     text: _volume || qsTr("[Volume]")
                     width: parent.width
                     height: 20
@@ -124,7 +133,7 @@ Item {
             height: parent.height
         }
 
-        Text {
+        Label {
             id: errorMsg
             visible: false
             text: 'Error...'
@@ -141,12 +150,11 @@ Item {
         visible: false
         anchors.fill: parent
         topPadding: 26
-        leftPadding: parent.width / 4
+        leftPadding: 20
         spacing: 20
 
         ComboBox {
             id: exchangeComboBox
-            model: exchanges
         }
 
         ComboBox {

@@ -5,7 +5,7 @@ import Qt.labs.settings 1.0
 ApplicationWindow {
     id: app
     visible: true
-    width: 640
+    width: 400
     height: 480
     minimumWidth: width
     maximumWidth: width
