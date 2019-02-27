@@ -6,6 +6,7 @@ import "../../exchange/Cryptopia.js" as Cryptopia
 import "../../exchange/Kucoin.js" as Kucoin
 import "../../exchange/Litebit.js" as Litebit
 import "../../util/Error.js" as Error
+import "../../util/Num.js" as Num
 
 TickerForm {
     function exchanges() {
@@ -87,11 +88,11 @@ TickerForm {
             if (handleError(error))
                 return
 
-            _price = t.price || '--'
-            _high = t.high || '--'
-            _low = t.low || '--'
-            _change = t.change || '--'
-            _volume = t.volume || '--'
+            _price = Num.precise(t.price) || t.price || '--'
+            _high = Num.precise(t.high) || '--'
+            _low = Num.precise(t.low) || '--'
+            _change = Num.precise(t.change) || '--'
+            _volume = Num.precise(t.volume) || '--'
 
             state = '' // loaded
         })
@@ -124,4 +125,5 @@ TickerForm {
             return null
         return eval(exchangeName)
     }
+
 }

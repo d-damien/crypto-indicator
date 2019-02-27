@@ -16,5 +16,6 @@
         <file>TickerListView.qml</file>
         <file>component/util/ReorderDelegate.qml</file>
         <file>util/Error.js</file>
+        <file>util/Num.js</file>
     </qresource>
 </RCC>
