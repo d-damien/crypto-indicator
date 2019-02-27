@@ -8,18 +8,23 @@ import "../../exchange/Litebit.js" as Litebit
 import "../../util/Error.js" as Error
 
 TickerForm {
-    property var exchanges: [
-        '',
-        'Binance',
-        'Coinex',
-        'Cryptopia',
-        'Kucoin',
-        'Litebit',
-    ]
+    function exchanges() {
+        return Object.keys(_exchanges)
+    }
+
+    property var _exchanges: {
+        '': '',
+        Binance: '#F5BC00',
+        Coinex: '#12D5C2',
+        Cryptopia: '#16BD7D',
+        Kucoin: '#127EFF',
+        Litebit: '#2480C3',
+    }
     property var symbols: []
 
     // edit logic
     exchangeComboBox {
+        model: exchanges()
         onActivated: {
             _exchange = exchangeComboBox.model[index]
             model._exchange = _exchange
@@ -34,7 +39,6 @@ TickerForm {
                 symbols = l
             })
         }
-
     }
 
     symbolComboBox {
@@ -116,7 +120,7 @@ TickerForm {
     // Safely change string to exchange class.
     // Using eval to avoid long switch()es.
     function fromString(exchangeName) {
-        if (exchanges.indexOf(exchangeName) === -1 || ! exchangeName)
+        if (exchanges().indexOf(exchangeName) === -1 || ! exchangeName)
             return null
         return eval(exchangeName)
     }

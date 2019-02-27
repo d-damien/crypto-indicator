@@ -1,11 +1,13 @@
 import QtQuick 2.11
 import QtQuick.Controls 2.4
+import QtQuick.Controls.Material 2.3
 import "component/ticker"
 import "component/util"
 
 
 ListView {
     id: listView
+    spacing: 2
     // drop to remove
     DropArea {
         z: -1
@@ -40,8 +42,8 @@ ListView {
             id: ticker
             width: parent.width
             // visual clue for D&D
-            bgColor: held ? 'lightgray' : 'gray'
-            opacity: 0.9
+            bgColor: held ? '#4C4C4C' : Material.background
+            opacity: 0.8
 
             // update delegate only when instantiated
             Component.onCompleted: ticker.update()
