@@ -26,6 +26,9 @@ Project {
         ]
 
         files: [
+            "README.md",
+            "doc/README.en.md",
+            "doc/app.png",
             "main.cpp",
             "qml.qrc",
         ]
