@@ -7,3 +7,14 @@ function precise(number, precision) {
     // toPrecision returns a string
     return Number(Number(number).toFixed(precision))
 }
+
+function percent(ratio) {
+    if (! isFinite(ratio))
+        return '--'
+
+    let str = ''
+    str += ratio > 0 ? '+' : ''
+    str += ratio * 100
+    str += '%'
+    return str
+}

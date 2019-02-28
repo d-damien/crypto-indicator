@@ -66,6 +66,10 @@ TickerForm {
         }
     }
 
+    changeLabel {
+        text: Num.percent(_change)
+    }
+
     Timer {
         id: timer
         interval: 300000

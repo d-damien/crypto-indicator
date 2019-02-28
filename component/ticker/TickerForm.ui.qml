@@ -15,6 +15,7 @@ Item {
     property alias symbolComboBox: symbolComboBox
     // property alias usdtSwitch: usdtSwitch
     property alias confirmButton: confirmButton
+    property alias changeLabel: changeLabel
     property alias errorMsg: errorMsg
 
     // change bg dynamically (e.g. drag & drop)
@@ -105,7 +106,8 @@ Item {
                 topPadding: 20
 
                 Label {
-                    text: (_change > 0 ? '+' : '') + _change + '%'
+                    id: changeLabel
+                    text: qsTr("[Change]")
                     color: _change > 0 ? 'green' : 'red'
                     font.pixelSize: 20
                     font.bold: true
