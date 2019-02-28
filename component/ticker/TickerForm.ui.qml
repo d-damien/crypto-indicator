@@ -82,6 +82,8 @@ Item {
 
                 Label {
                     text: _price || qsTr("[Price]")
+                    font.pixelSize: 20
+                    color: '#fbfbfb'
                     width: parent.width
                     height: 40
                     verticalAlignment: Text.AlignVCenter
@@ -103,7 +105,10 @@ Item {
                 topPadding: 20
 
                 Label {
-                    text: _change || qsTr("[Change]")
+                    text: (_change > 0 ? '+' : '') + _change + '%'
+                    color: _change > 0 ? 'green' : 'red'
+                    font.pixelSize: 20
+                    font.bold: true
                     width: parent.width
                     height: 60
                     verticalAlignment: Text.AlignVCenter

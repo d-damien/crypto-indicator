@@ -6,12 +6,13 @@ ApplicationWindow {
     id: app
     visible: true
     width: 400
-    height: 480
+    height: 550
     minimumWidth: width
     maximumWidth: width
     minimumHeight: height
     maximumHeight: height
     title: qsTr("Tabs")
+
 
     // restore & save data
     property string tickerList: "[[]]"

@@ -8,6 +8,7 @@ import "component/util"
 ListView {
     id: listView
     spacing: 2
+    interactive: false
     // drop to remove
     DropArea {
         z: -1
