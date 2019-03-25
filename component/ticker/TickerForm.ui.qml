@@ -107,7 +107,7 @@ Item {
 
                 Label {
                     id: changeLabel
-                    text: qsTr("[Change]")
+                    text: _change || qsTr("[Change]")
                     color: _change > 0 ? '#0E9D0E' : 'red'
                     font.pixelSize: 20
                     font.bold: true

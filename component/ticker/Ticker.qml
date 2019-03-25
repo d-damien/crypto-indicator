@@ -66,9 +66,6 @@ TickerForm {
         }
     }
 
-    changeLabel {
-        text: Num.percent(_change)
-    }
 
     Timer {
         id: timer
@@ -95,7 +92,7 @@ TickerForm {
             _price = Num.precise(t.price) || t.price || '--'
             _high = Num.precise(t.high) || '--'
             _low = Num.precise(t.low) || '--'
-            _change = Num.precise(t.change) || '--'
+            _change = Num.percent(t.change) || '--'
             _volume = Num.precise(t.volume) || '--'
 
             state = '' // loaded

@@ -14,7 +14,7 @@ function percent(ratio) {
 
     let str = ''
     str += ratio > 0 ? '+' : ''
-    str += ratio * 100
+    str += precise(ratio * 100, 2)
     str += '%'
     return str
 }
